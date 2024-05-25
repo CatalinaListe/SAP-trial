@@ -21,11 +21,13 @@ public class DefaultTourFacade implements TourFacade
         {
             throw new IllegalArgumentException("Tour id cannot be null");
         }
+
         final ProductModel product = productService.getProductForCode(tourId);
         if (product == null)
         {
             return null;
         }
+
         // Create a list of ConcertSummaryData from the matches
         final List<ConcertSummaryData> concerts = new ArrayList<>();
         if (product.getVariants() != null)
@@ -40,6 +42,7 @@ public class DefaultTourFacade implements TourFacade
                     summary.setDate(concert.getDate());
                     summary.setVenue(concert.getVenue());
                     summary.setType(concert.getConcertType() == ConcertType.OPENAIR ? "Outdoors" : "Indoors");
+                    summary.setCountDown(concert.getDaysUntil());
                     concerts.add(summary);
                 }
             }
