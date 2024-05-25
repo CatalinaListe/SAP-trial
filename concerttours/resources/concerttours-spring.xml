@@ -43,4 +43,9 @@
 
     <!-- setea el bean del handler del atributo dinamico -->
     <bean id="concertDaysUntilAttributeHandler" class="concerttours.attributehandlers.ConcertDaysUntilAttributeHandler"/>
+
+    <!-- declaro el eventlistener como un bean-->
+    <bean id="concerttourEventListener" class="concerttours.events.NewBandEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService" />
+    </bean>
 </beans>
