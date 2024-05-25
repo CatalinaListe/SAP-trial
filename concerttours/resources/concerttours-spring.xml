@@ -40,4 +40,7 @@
     <bean id = "defaultTourFacade" class ="concerttours.facades.impl.DefaultTourFacade" >
         <property name = "productService" ref = "productService" />
     </bean>
+
+    <!-- setea el bean del handler del atributo dinamico -->
+    <bean id="concertDaysUntilAttributeHandler" class="concerttours.attributehandlers.ConcertDaysUntilAttributeHandler"/>
 </beans>
