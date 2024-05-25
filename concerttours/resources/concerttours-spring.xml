@@ -7,9 +7,10 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.1.xsd"
     >
-    <!--Agrega el context-->
+    <!--settea el context-->
     <context:component-scan base-package="concerttours"/>
 
+    <!-- setea el servicio de la extension -->
     <bean id="concerttoursService" class="concerttours.service.impl.DefaultConcerttoursService">
         <!-- setter injection example -->
         <property name="modelService" ref="modelService"/>
@@ -17,13 +18,26 @@
         <property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean>
 
+    <!-- setea la configuracion de la extension -->
     <bean id="ConcerttoursCustomSetup" class="concerttours.setup.ConcerttoursCustomSetup">
         <property name="importService" ref="importService"/>
     </bean>
 
-    <!--Agrega el bean del servicio-->
+    <!--setea como bean el servicio-->
     <alias name = "defaultBandService" alias = "bandService" />
     <bean id = "defaultBandService" class = "concerttours.service.impl.DefaultBandService" >
     <property name = "bandDAO" ref = "bandDAO" />
+    </bean>
+
+    <!-- seta como bean el band facade-->
+    <alias name = "defaultBandFacade" alias = "bandFacade" />
+    <bean id = "defaultBandFacade" class ="concerttours.facades.impl.DefaultBandFacade" >
+        <property name = "bandService" ref = "bandService" />
+    </bean>
+
+    <!-- setea como bean el tourfacade -->
+    <alias name = "defaultTourFacade" alias = "tourFacade" />
+    <bean id = "defaultTourFacade" class ="concerttours.facades.impl.DefaultTourFacade" >
+        <property name = "productService" ref = "productService" />
     </bean>
 </beans>
