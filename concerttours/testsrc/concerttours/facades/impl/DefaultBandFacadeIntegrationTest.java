@@ -38,22 +38,25 @@ public class DefaultBandFacadeIntegrationTest extends ServicelayerTransactionalT
     private static final String BAND_HISTORY = "New contemporary, 7-piece Jaz unit from London, formed in 2015";
     /** Albums sold by test band. */
     private static final Long ALBUMS_SOLD = Long.valueOf(10L);
-    @Before
-    public void setUp()
-    {
-        try {
-          Thread.sleep(TimeUnit.SECONDS.toMillis(1));
-          new JdbcTemplate(Registry.getCurrentTenant().getDataSource()).execute("CHECKPOINT");
-          Thread.sleep(TimeUnit.SECONDS.toMillis(1));
-        } catch (InterruptedException exc) {}
-        // This instance of a BandModel will be used by the tests
-        bandModel = modelService.create(BandModel.class); 
-        bandModel.setCode(BAND_CODE);
-        bandModel.setName(BAND_NAME);      
-        
-        bandModel.setHistory(BAND_HISTORY);
-        bandModel.setAlbumSales(ALBUMS_SOLD);
+        @Before
+public void setUp() throws Exception
+{
+    try {
+        Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+    new JdbcTemplate(Registry.getCurrentTenant().getDataSource()).execute("CHECKPOINT");
+    Thread.sleep(TimeUnit.SECONDS.toMillis(1));
     }
+    catch (InterruptedException exc) {}
+    importCsv("/impex/essentialdata-mediaformats.impex", "UTF-8");
+  
+    // This instance of a BandModel will be used by the tests
+    bandModel = modelService.create(BandModel.class); 
+    bandModel.setCode(BAND_CODE);
+    bandModel.setName(BAND_NAME);      
+    
+    bandModel.setHistory(BAND_HISTORY);
+    bandModel.setAlbumSales(ALBUMS_SOLD);
+}
     /**
      * Tests exception behavior by getting a band which doesn't exist
      */
