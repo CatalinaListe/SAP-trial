@@ -34,6 +34,7 @@
     <bean id = "defaultBandFacade" class ="concerttours.facades.impl.DefaultBandFacade" >
         <property name = "bandService" ref = "bandService" />
         <property name="mediaService" ref="mediaService"/>
+        <property name="configurationService" ref="configurationService" />
     </bean>
 
     <!-- setea como bean el tourfacade -->

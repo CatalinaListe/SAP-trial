@@ -2,6 +2,7 @@ package concerttours.facades.impl;
 import de.hybris.platform.core.model.media.MediaContainerModel;
 import de.hybris.platform.core.model.media.MediaFormatModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.media.MediaService;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,11 @@ import java.util.Locale;
 
 public class DefaultBandFacade implements BandFacade
 {
+    public  static final String BAND_LIST_FORMAT = "band.list.format.name";
+    private static final String BAND_DETAIL_FORMAT = "band.detail.format.name";
     private BandService bandService;
     private MediaService mediaService;
+    private ConfigurationService configService;
     @Override
     public List<BandData> getBands()
     {
@@ -101,5 +105,10 @@ public class DefaultBandFacade implements BandFacade
     public void setMediaService(final MediaService mediaService)
     {
         this.mediaService = mediaService;
+    }
+    @Required
+    public void setConfigurationService(final ConfigurationService configService)
+    {
+        this.configService = configService;
     }
 }
